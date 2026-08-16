@@ -1062,4 +1062,118 @@ app.use("/api", (req, res) => {
 ========================================================= */
 
 app.use((req, res) => {
-  res.status(404).send("Page
+  res.status(404).send("Page not found");
+});
+
+/* =========================================================
+   ERROR HANDLER
+========================================================= */
+
+app.use((error, req, res, next) => {
+  console.error("SERVER ERROR:", error);
+
+  if (error.code === 11000) {
+    return res.status(409).json({
+      success: false,
+      message:
+        "A record with that information already exists"
+    });
+  }
+
+  return res.status(
+    error.status || 500
+  ).json({
+    success: false,
+    message:
+      process.env.NODE_ENV === "production"
+        ? "Internal server error"
+        : error.message
+  });
+});
+
+/* =========================================================
+   ORDINAL
+========================================================= */
+
+function getOrdinal(number) {
+  const remainder10 = number % 10;
+  const remainder100 = number % 100;
+
+  if (
+    remainder10 === 1 &&
+    remainder100 !== 11
+  ) {
+    return "st";
+  }
+
+  if (
+    remainder10 === 2 &&
+    remainder100 !== 12
+  ) {
+    return "nd";
+  }
+
+  if (
+    remainder10 === 3 &&
+    remainder100 !== 13
+  ) {
+    return "rd";
+  }
+
+  return "th";
+}
+
+/* =========================================================
+   START SERVER
+========================================================= */
+
+const server = app.listen(
+  PORT,
+  () => {
+    console.log(
+      `🚀 Server running on port ${PORT}`
+    );
+    console.log(
+      `🌐 Port: ${PORT}`
+    );
+  }
+);
+
+/* =========================================================
+   GRACEFUL SHUTDOWN
+========================================================= */
+
+async function shutdown(signal) {
+  console.log(
+    `${signal} received. Shutting down...`
+  );
+
+  server.close(async () => {
+    try {
+      await mongoose.connection.close();
+
+      console.log(
+        "✅ MongoDB connection closed"
+      );
+
+      process.exit(0);
+    } catch (error) {
+      console.error(
+        "❌ Shutdown error:",
+        error.message
+      );
+
+      process.exit(1);
+    }
+  });
+}
+
+process.on(
+  "SIGTERM",
+  () => shutdown("SIGTERM")
+);
+
+process.on(
+  "SIGINT",
+  () => shutdown("SIGINT")
+);
