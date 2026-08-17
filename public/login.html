@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Betawin | Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 20, 147, .35), transparent 35%),
+        radial-gradient(circle at 90% 90%, rgba(0, 123, 255, .35), transparent 35%),
+        #070710;
+
+      color: white;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      padding: 32px 25px;
+      border-radius: 24px;
+
+      background: rgba(18, 18, 32, .92);
+      border: 1px solid rgba(255,255,255,.12);
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.55),
+        0 0 35px rgba(255,20,147,.08);
+
+      backdrop-filter: blur(18px);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+
+      background: linear-gradient(
+        90deg,
+        #ff1493,
+        #8a2be2,
+        #008cff
+      );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .welcome {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+
+    .input-group {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ddd;
+    }
+
+    input {
+      width: 100%;
+      height: 52px;
+      padding: 0 15px;
+
+      border-radius: 13px;
+      border: 1px solid #333346;
+
+      background: #10101c;
+      color: white;
+
+      font-size: 16px;
+      outline: none;
+
+      transition: .25s;
+    }
+
+    input::placeholder {
+      color: #777;
+    }
+
+    input:focus {
+      border-color: #ff1493;
+      box-shadow: 0 0 15px rgba(255,20,147,.2);
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 55px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      border: none;
+      background: transparent;
+
+      color: #888;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .show-password:hover {
+      color: #ff1493;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 53px;
+
+      border: none;
+      border-radius: 13px;
+
+      background: linear-gradient(
+        90deg,
+        #ff1493,
+        #8a2be2,
+        #007bff
+      );
+
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      margin-top: 5px;
+
+      transition: .25s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,20,147,.25);
+    }
+
+    .login-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #message {
+      min-height: 20px;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .forgot {
+      text-align: right;
+      margin-top: 12px;
+    }
+
+    .forgot a,
+    .register a {
+      color: #4da6ff;
+      text-decoration: none;
+    }
+
+    .forgot a:hover,
+    .register a:hover {
+      color: #ff1493;
+    }
+
+    .register {
+      text-align: center;
+      margin-top: 25px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .loader {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: white;
+
+      border-radius: 50%;
+
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 7px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <div class="logo">BETAWIN</div>
+
+    <div class="welcome">
+      Welcome back. Login to continue.
+    </div>
+
+    <form id="loginForm">
+
+      <!-- PHONE -->
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="07XXXXXXXX"
+          autocomplete="tel"
+          required
+        >
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="input-group">
+
+        <label for="password">Password</label>
+
+        <div class="password-wrapper">
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            id="showPassword"
+          >
+            Show
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- FORGOT -->
+      <div class="forgot">
+        <a href="/forgot-password.html">
+          Forgot password?
+        </a>
+      </div>
+
+      <!-- LOGIN -->
+      <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+      >
+        Login
+      </button>
+
+      <!-- MESSAGE -->
+      <div id="message"></div>
+
+    </form>
+
+    <!-- REGISTER -->
+    <div class="register">
+      Don't have an account?
+      <a href="/register.html">Create account</a>
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const showPassword =
+      document.getElementById("showPassword");
+
+
+    /* =========================
+       SHOW / HIDE PASSWORD
+    ========================== */
+
+    showPassword.addEventListener("click", function () {
+
+      if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+        showPassword.textContent = "Hide";
+
+      } else {
+
+        passwordInput.type = "password";
+        showPassword.textContent = "Show";
+
+      }
+
+    });
+
+
+    /* =========================
+       LOGIN
+    ========================== */
+
+    loginForm.addEventListener("submit", async function (event) {
+
+      event.preventDefault();
+
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      /* Clear previous message */
+
+      message.textContent = "";
+      message.style.color = "";
+
+
+      /* Basic validation */
+
+      if (!phone || !password) {
+
+        message.style.color = "#ff5c7a";
+        message.textContent =
+          "Please enter your phone number and password.";
+
+        return;
+      }
+
+
+      /* Disable button */
+
+      loginBtn.disabled = true;
+
+      loginBtn.innerHTML =
+        '<span class="loader"></span>Logging in...';
+
+
+      try {
+
+        /*
+          BACKEND LOGIN ENDPOINT
+
+          Expected:
+          POST /api/auth/login
+
+          Body:
+          {
+            phone,
+            password
+          }
+        */
+
+        const response = await fetch(
+          "/api/auth/login",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            credentials: "include",
+
+            body: JSON.stringify({
+              phone: phone,
+              password: password
+            })
+          }
+        );
+
+
+        /* Try to read JSON */
+
+        let data;
+
+        try {
+
+          data = await response.json();
+
+        } catch {
+
+          throw new Error(
+            "Server returned an invalid response."
+          );
+
+        }
+
+
+        /* Backend rejected login */
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.message ||
+            "Invalid phone number or password."
+          );
+
+        }
+
+
+        /* =========================
+           SAVE TOKEN
+        ========================== */
+
+        if (data.token) {
+
+          localStorage.setItem(
+            "token",
+            data.token
+          );
+
+        }
+
+
+        /* =========================
+           SAVE USER
+        ========================== */
+
+        if (data.user) {
+
+          localStorage.setItem(
+            "user",
+            JSON.stringify(data.user)
+          );
+
+        }
+
+
+        /* Success */
+
+        message.style.color = "#35ff9b";
+
+        message.textContent =
+          "Login successful. Opening dashboard...";
+
+
+        /*
+          REDIRECT TO DASHBOARD
+        */
+
+        setTimeout(function () {
+
+          window.location.href =
+            "/dashboard.html";
+
+        }, 600);
+
+
+      } catch (error) {
+
+        console.error(
+          "LOGIN ERROR:",
+          error
+        );
+
+
+        message.style.color = "#ff5c7a";
+
+        message.textContent =
+          error.message ||
+          "Unable to connect to the server.";
+
+
+        /* Enable button again */
+
+        loginBtn.disabled = false;
+
+        loginBtn.textContent =
+          "Login";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
