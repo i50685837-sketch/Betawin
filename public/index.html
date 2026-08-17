@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Betawin | Sports & Games</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: white;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255,20,147,.35), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(0,123,255,.35), transparent 30%),
+        #070710;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 7%;
+
+      background: rgba(8,8,18,.82);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+
+      backdrop-filter: blur(15px);
+
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+
+      background: linear-gradient(
+        90deg,
+        #ff1493,
+        #8a2be2,
+        #008cff
+      );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-buttons a {
+      text-decoration: none;
+      color: white;
+
+      padding: 10px 18px;
+
+      border-radius: 10px;
+
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .login {
+      border: 1px solid #444;
+    }
+
+    .register {
+      background: linear-gradient(
+        90deg,
+        #ff1493,
+        #007bff
+      );
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: calc(100vh - 70px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 50px 7%;
+
+      text-align: center;
+
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .badge {
+      display: inline-block;
+
+      padding: 8px 16px;
+
+      border-radius: 30px;
+
+      background: rgba(255,20,147,.1);
+
+      border: 1px solid rgba(255,20,147,.3);
+
+      color: #ff70bb;
+
+      font-size: 13px;
+
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 78px);
+
+      line-height: 1.05;
+
+      font-weight: 900;
+
+      margin-bottom: 22px;
+    }
+
+    h1 span {
+      background: linear-gradient(
+        90deg,
+        #ff1493,
+        #8a2be2,
+        #008cff
+      );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      color: #aaa;
+
+      font-size: 18px;
+
+      line-height: 1.7;
+
+      max-width: 650px;
+
+      margin: auto;
+
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 14px;
+
+      flex-wrap: wrap;
+    }
+
+    .hero-buttons a {
+      text-decoration: none;
+
+      padding: 15px 28px;
+
+      border-radius: 13px;
+
+      font-weight: bold;
+
+      color: white;
+
+      transition: .25s;
+    }
+
+    .primary {
+      background: linear-gradient(
+        90deg,
+        #ff1493,
+        #007bff
+      );
+
+      box-shadow:
+        0 10px 30px rgba(255,20,147,.18);
+    }
+
+    .secondary {
+      border: 1px solid #444;
+      background: rgba(255,255,255,.04);
+    }
+
+    .hero-buttons a:hover {
+      transform: translateY(-3px);
+    }
+
+    /* FEATURES */
+
+    .features {
+      padding: 60px 7% 80px;
+
+      max-width: 1200px;
+
+      margin: auto;
+    }
+
+    .features-title {
+      text-align: center;
+
+      font-size: 30px;
+
+      margin-bottom: 35px;
+    }
+
+    .feature-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 25px;
+
+      border-radius: 18px;
+
+      background: rgba(255,255,255,.04);
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 35px;
+
+      margin-bottom: 13px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #999;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 25px;
+
+      text-align: center;
+
+      color: #777;
+
+      border-top: 1px solid rgba(255,255,255,.08);
+
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+
+      nav {
+        padding: 0 20px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      .nav-buttons a {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <div class="logo">
+      BETAWIN
+    </div>
+
+    <div class="nav-buttons">
+
+      <a
+        href="/login.html"
+        class="login"
+      >
+        Login
+      </a>
+
+      <a
+        href="/register.html"
+        class="register"
+      >
+        Register
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="badge">
+        Welcome to Betawin
+      </div>
+
+      <h1>
+        Play.
+        <span>Enjoy.</span>
+        Win.
+      </h1>
+
+      <p class="description">
+        Your gaming platform for sports and entertainment.
+        Create your account and access your Betawin dashboard.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          href="/register.html"
+          class="primary"
+        >
+          Create Account
+        </a>
+
+        <a
+          href="/login.html"
+          class="secondary"
+        >
+          Login
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="features">
+
+    <h2 class="features-title">
+      Everything in one place
+    </h2>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ⚽
+        </div>
+
+        <h3>
+          Sports
+        </h3>
+
+        <p>
+          Access your sports section from your account dashboard.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🎮
+        </div>
+
+        <h3>
+          Games
+        </h3>
+
+        <p>
+          Explore the available games on the platform.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          💳
+        </div>
+
+        <h3>
+          Wallet
+        </h3>
+
+        <p>
+          Manage your account balance and transactions.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🔐
+        </div>
+
+        <h3>
+          Secure Account
+        </h3>
+
+        <p>
+          Login and account access are handled through the backend.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 Betawin. All rights reserved.
+
+  </footer>
+
+
+  <script>
+
+    /*
+      If the user is already logged in,
+      you can send them directly to
+      the dashboard.
+    */
+
+    const token =
+      localStorage.getItem("token");
+
+    if (token) {
+
+      const dashboardLink =
+        document.createElement("a");
+
+      dashboardLink.href =
+        "/dashboard.html";
+
+      dashboardLink.className =
+        "register";
+
+      dashboardLink.textContent =
+        "Dashboard";
+
+      const navButtons =
+        document.querySelector(".nav-buttons");
+
+      navButtons.appendChild(
+        dashboardLink
+      );
+
+    }
+
+  </script>
+
+</body>
+  </html>
